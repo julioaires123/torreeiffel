@@ -47,7 +47,7 @@ function exibirDataAtualizada() {
   }
 
   // Atualiza o conteúdo do elemento com o ID "date"
-  document.getElementById("date").innerHTML = semanas[diasem] + ", " + dia + meses[mes] +  " " + ","  + ano;
+  document.getElementById("date").innerHTML = semanas[diasem] + ", " + dia  + meses[mes] +  " " + ","  + ano;
 }
 
 // Função para atualizar a data a cada segundo
