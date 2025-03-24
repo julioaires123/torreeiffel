@@ -31,9 +31,6 @@ function exibirDataAtualizada() {
     let semanas = [
       "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"
     ];
-}
-
-
   let data = new Date();
   let diasem = data.getDay();
   let dia = data.getDate();
