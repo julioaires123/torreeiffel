@@ -22,15 +22,16 @@
     
 //Dia mês e ano /////////////////////////////////////////////////////////////////////////////////////////////
 // Função para exibir a data atualizada
-function exibirDataAtualizada() {
+function exibirDataAtualizada() { 
    let meses = [
-      "January", "February", "March", "April", "May", "June", 
-      "July", "August", "September", "October", "November", "December"
+      "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
+      "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
     ];
     
     let semanas = [
-      "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+      "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"
     ];
+}
 
   let data = new Date();
   let diasem = data.getDay();
