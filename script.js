@@ -23,32 +23,25 @@
 //Dia mês e ano /////////////////////////////////////////////////////////////////////////////////////////////
 // Função para exibir a data atualizada
 function exibirDataAtualizada() { 
-   let meses = [
-      "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
-      "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+    let meses = [
+        "janvier", "février", "mars", "avril", "mai", "juin", 
+        "juillet", "août", "septembre", "octobre", "novembre", "décembre"
     ];
     
     let semanas = [
-      "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"
+        "dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"
     ];
-  let data = new Date();
-  let diasem = data.getDay();
-  let dia = data.getDate();
-  let mes = data.getMonth();
-  let ano = data.getFullYear();
 
-  // Verifica se é meia-noite (00:00:00)
-  if (data.getHours() === 0 && data.getMinutes() === 0 && data.getSeconds() === 0) {
-    // Incrementa um dia
-    data.setDate(data.getDate() + 0);
-    dia = data.getDate();
-    mes = data.getMonth();
-    ano = data.getFullYear();
-  }
+    let agora = new Date();
+    let diasem = agora.getDay();
+    let dia = agora.getDate();
+    let mes = agora.getMonth();
+    let ano = agora.getFullYear();
 
     // Atualiza o conteúdo do elemento com o ID "date"
     document.getElementById("date").innerHTML = semanas[diasem] + " " + dia + " " + mois[mes] + " " + ano;
 }
+
 
 // Função para atualizar a data a cada segundo
 function atualizarData() {
