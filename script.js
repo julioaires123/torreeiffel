@@ -46,8 +46,8 @@ function exibirDataAtualizada() {
     ano = data.getFullYear();
   }
 
-  // Atualiza o conteúdo do elemento com o ID "date"
-  document.getElementById("date").innerHTML = semanas[diasem] + ", "  " + dia + ", + meses[mes] +  " "  + ano;
+    // Atualiza o conteúdo do elemento com o ID "date"
+    document.getElementById("date").innerHTML = semanas[diasem] + " " + dia + " " + mois[mes] + " " + ano;
 }
 
 // Função para atualizar a data a cada segundo
