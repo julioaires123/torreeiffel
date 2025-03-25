@@ -1,83 +1,48 @@
-//horário de Brasília////////////////////////////////////////////////////////////////////////////////////////
-        setInterval(function relog() {
-        let rel = document.getElementById('relogio01')
-        let data = new Date();
-        data.setHours(data.getHours() +4);
-        data.setSeconds(data.getSeconds() +19);
-        let h = data.getHours();
-        let m = data.getMinutes();
-        let s = data.getSeconds();
-          if (h < 10) {// coloca um zero antes dos números abaixo de dez: ex: 1: 1: 1 depois ex 01:01:01////////////////////
-           h = `0${h}`
-        }
-        if (m < 10) {
-           m = `0${m}`
-        }  
-        if (s < 10) {
-           s = `0${s}`
-        }
-        // Mostra a hora minutos e segundos na página /////////////////////////////////////////////////////
-            rel.innerHTML = `${h}:${m}:${s}`
-        })
+// Atualiza o relógio com horário da França (UTC+1 ou UTC+2 no horário de verão)
+setInterval(function relog() {
+    let rel = document.getElementById('relogio01');
+    let data = new Date();
+    data.setUTCHours(data.getUTCHours() + 1); // França UTC+1 (ou UTC+2 no horário de verão automático)
+    let h = data.getHours();
+    let m = data.getMinutes();
+    let s = data.getSeconds();
     
-//Dia mês e ano /////////////////////////////////////////////////////////////////////////////////////////////
-// Função para exibir a data atualizada
-function exibirDataAtualizada() { 
-   let meses = [
-      "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
-      "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-    ];
+    if (h < 10) h = `0${h}`;
+    if (m < 10) m = `0${m}`;
+    if (s < 10) s = `0${s}`;
     
-    let semanas = [
-      "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"
-    ];
-  let data = new Date();
-  let diasem = data.getDay();
-  let dia = data.getDate();
-  let mes = data.getMonth();
-  let ano = data.getFullYear();
+    rel.innerHTML = `${h}:${m}:${s}`;
+}, 1000);
 
-  // Verifica se é meia-noite (00:00:00)
-  if (data.getHours() === 0 && data.getMinutes() === 0 && data.getSeconds() === 0) {
-    // Incrementa um dia
-    data.setDate(data.getDate() + 0);
-    dia = data.getDate();
-    mes = data.getMonth();
-    ano = data.getFullYear();
-  }
-
-  // Atualiza o conteúdo do elemento com o ID "date"
-  document.getElementById("date").innerHTML = semanas[diasem] + ", " + dia + " " + meses[mes] + ", "  + ano;
+// Exibição da data em francês
+function exibirDataAtualizada() {
+    let meses = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    let semanas = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+    
+    let data = new Date();
+    data.setUTCHours(data.getUTCHours() + 1); // Ajuste para o horário da França
+    let diasem = data.getDay();
+    let dia = data.getDate();
+    let mes = data.getMonth();
+    let ano = data.getFullYear();
+    
+    document.getElementById("date").innerHTML = `${semanas[diasem]}, ${dia} ${meses[mes]}, ${ano}`;
 }
 
-// Função para atualizar a data a cada segundo
+// Atualiza a data à meia-noite na França
 function atualizarData() {
-  let data = new Date();
-  let horas = data.getHours();
-  let minutos = data.getMinutes();
-  let segundos = data.getSeconds();
+    let data = new Date();
+    data.setUTCHours(data.getUTCHours() + 1); // Ajuste para o horário da França
+    let horas = data.getHours();
+    let minutos = data.getMinutes();
+    let segundos = data.getSeconds();
 
-  // Verifica se é meia-noite (00:00:00)
-  if (horas === 0 && minutos === 0 && segundos === 0) {
-    exibirDataAtualizada();
-
-    // Define o próximo intervalo de atualização para o próximo dia
-    let proximaAtualizacao = new Date();
-    proximaAtualizacao.setDate(proximaAtualizacao.getDate() + 0);     
-    proximaAtualizacao.setHours(0);
-    proximaAtualizacao.setMinutes(0);
-    proximaAtualizacao.setSeconds(0);
-
-    let tempoAteProximaAtualizacao = proximaAtualizacao.getTime() - data.getTime();
-
-    setTimeout(atualizarData, tempoAteProximaAtualizacao);
-  } else {
-    setTimeout(atualizarData, 1000); // Chama a função novamente após 1 segundo
-  }
+    if (horas === 0 && minutos === 0 && segundos === 0) {
+        exibirDataAtualizada();
+    }
+    setTimeout(atualizarData, 1000); // Verifica a cada segundo
 }
 
-// Chama a função para exibir a data atualizada
+// Inicializa a data e a atualização automática
 exibirDataAtualizada();
-
-// Atualiza a data a cada segundo
 atualizarData();
