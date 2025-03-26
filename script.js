@@ -32,7 +32,7 @@ function exibirDataAtualizada() {
 // Atualiza a data à meia-noite na França
 function atualizarData() {
     let data = new Date();
-    data.setUTCHours(data.getUTCHours() + 1); // Ajuste para o horário da França
+    data.setUTCHours(data.getUTCHours() + 4); // Ajuste para o horário da França
     let horas = data.getHours();
     let minutos = data.getMinutes();
     let segundos = data.getSeconds();
