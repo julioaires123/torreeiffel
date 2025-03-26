@@ -2,7 +2,7 @@
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
-    data.setUTCHours(data.getUTCHours() + 1); // França UTC+1 (ou UTC+2 no horário de verão automático)
+    data.setUTCHours(data.getUTCHours() + 4); // França UTC+1 (ou UTC+2 no horário de verão automático)
     let h = data.getHours();
     let m = data.getMinutes();
     let s = data.getSeconds();
