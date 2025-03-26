@@ -1,32 +1,9 @@
-// Função para verificar se está no horário de verão na França (último domingo de março até o último domingo de outubro)
-function isHorarioVeraoFranca(date) {
-    let ano = date.getFullYear();
-
-    // Último domingo de março (início do horário de verão)
-    let ultimoDomingoMarco = new Date(Date.UTC(ano, 2, 31)); // 31 de março
-    while (ultimoDomingoMarco.getUTCDay() !== 0) { // Enquanto não for domingo, volta um dia
-        ultimoDomingoMarco.setUTCDate(ultimoDomingoMarco.getUTCDate() - 1);
-    }
-
-    // Último domingo de outubro (fim do horário de verão)
-    let ultimoDomingoOutubro = new Date(Date.UTC(ano, 9, 31)); // 31 de outubro
-    while (ultimoDomingoOutubro.getUTCDay() !== 0) {
-        ultimoDomingoOutubro.setUTCDate(ultimoDomingoOutubro.getUTCDate() - 1);
-    }
-
-    return date >= ultimoDomingoMarco && date < ultimoDomingoOutubro;
-}
-
-// Atualiza o relógio com horário correto da França
+// Atualiza o relógio com horário da França (UTC+1 ou UTC+2 no horário de verão)
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 25); // Ajuste de segundos
-
-    // Ajuste automático para UTC+1 ou UTC+2 no horário de verão
-    let offsetHoras = isHorarioVeraoFranca(data) ? 2 : 1;
-    data.setUTCHours(data.getUTCHours() + offsetHoras);
-
+    data.setUTCSeconds(data.getUTCSeconds() + 25); // ajusta os seguntos )
+    data.setUTCHours(data.getUTCHours() + 4); // França UTC+1 (ou UTC+2 no horário de verão automático)
     let h = data.getHours();
     let m = data.getMinutes();
     let s = data.getSeconds();
@@ -44,9 +21,7 @@ function exibirDataAtualizada() {
     let semanas = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     
     let data = new Date();
-    let offsetHoras = isHorarioVeraoFranca(data) ? 2 : 1;
-    data.setUTCHours(data.getUTCHours() + offsetHoras);
-
+    data.setUTCHours(data.getUTCHours() + 1); // Ajuste para o horário da França
     let diasem = data.getDay();
     let dia = data.getDate();
     let mes = data.getMonth();
@@ -58,9 +33,8 @@ function exibirDataAtualizada() {
 // Atualiza a data à meia-noite na França
 function atualizarData() {
     let data = new Date();
-    let offsetHoras = isHorarioVeraoFranca(data) ? 2 : 1;
-    data.setUTCHours(data.getUTCHours() + offsetHoras);
-    
+    data.setUTCSeconds(data.getUTCSeconds() + 25); // Ajuste para o horário da França
+    data.setUTCHours(data.getUTCHours() + 4); // Ajuste para o horário da França
     let horas = data.getHours();
     let minutos = data.getMinutes();
     let segundos = data.getSeconds();
@@ -68,7 +42,7 @@ function atualizarData() {
     if (horas === 0 && minutos === 0 && segundos === 0) {
         exibirDataAtualizada();
     }
-    setTimeout(atualizarData, 1000);
+    setTimeout(atualizarData, 1000); // Verifica a cada segundo
 }
 
 // Inicializa a data e a atualização automática
