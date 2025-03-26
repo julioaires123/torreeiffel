@@ -2,12 +2,11 @@
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 25); // ajusta os segundos
+    data.setUTCSeconds(data.getUTCSeconds() + 25); // Ajusta os segundos
     
     let ano = data.getFullYear();
     let mes = data.getMonth();
     let dia = data.getDate();
-    let diaSemana = data.getDay();
     
     // Determina o horário de verão na França
     let inicioVerao = new Date(ano, 2, 31); // Último domingo de março
@@ -16,15 +15,11 @@ setInterval(function relog() {
     while (fimVerao.getDay() !== 0) fimVerao.setDate(fimVerao.getDate() - 1);
     
     let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 2 : 1; // UTC+2 no horário de verão, UTC+1 no padrão
-    data.setUTCHours(data.getUTCHours() + 3 + fusoHorario); // Ajusta com base no fuso da França /////////////////////////////////////////////////////// aqui
+    data.setUTCHours(data.getUTCHours() + fusoHorario + 1); // Ajusta com base no fuso da França
     
-    let h = data.getHours();
-    let m = data.getMinutes();
-    let s = data.getSeconds();
-    
-    if (h < 10) h = `0${h}`;
-    if (m < 10) m = `0${m}`;
-    if (s < 10) s = `0${s}`;
+    let h = data.getHours().toString().padStart(2, '0');
+    let m = data.getMinutes().toString().padStart(2, '0');
+    let s = data.getSeconds().toString().padStart(2, '0');
     
     rel.innerHTML = `${h}:${m}:${s}`;
 }, 1000);
@@ -39,15 +34,6 @@ function exibirDataAtualizada() {
     let mes = data.getMonth();
     let dia = data.getDate();
     let diaSemana = data.getDay();
-    
-    // Determina o horário de verão na França
-    let inicioVerao = new Date(ano, 2, 31);
-    while (inicioVerao.getDay() !== 0) inicioVerao.setDate(inicioVerao.getDate() - 1);
-    let fimVerao = new Date(ano, 9, 31);
-    while (fimVerao.getDay() !== 0) fimVerao.setDate(fimVerao.getDate() - 1);
-    
-    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 2 : 1;
-    data.setUTCHours(data.getUTCHours() + 3 + fusoHorario); // Ajuste para a França ////////////////////////////////////////// aqio
     
     document.getElementById("date").innerHTML = `${semanas[diaSemana]}, ${dia} ${meses[mes]}, ${ano}`;
 }
@@ -64,13 +50,9 @@ function atualizarData() {
     while (fimVerao.getDay() !== 0) fimVerao.setDate(fimVerao.getDate() - 1);
     
     let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 2 : 1;
-    data.setUTCHours(data.getUTCHours() + 3 + fusoHorario); ////////////////////////////////////////////////////////////////////////////////aqui
+    data.setUTCHours(data.getUTCHours() + fusoHorario + 1);
     
-    let horas = data.getHours();
-    let minutos = data.getMinutes();
-    let segundos = data.getSeconds();
-    
-    if (horas === 0 && minutos === 0 && segundos === 0) {
+    if (data.getHours() === 0 && data.getMinutes() === 0 && data.getSeconds() === 0) {
         exibirDataAtualizada();
     }
     setTimeout(atualizarData, 1000);
