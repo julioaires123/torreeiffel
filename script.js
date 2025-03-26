@@ -2,7 +2,6 @@
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 25); // Ajusta os segundos
     
     let ano = data.getUTCFullYear();
     let mes = data.getUTCMonth();
@@ -41,7 +40,6 @@ function exibirDataAtualizada() {
 // Atualiza a data à meia-noite na França
 function atualizarData() {
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 25);
     
     let ano = data.getUTCFullYear();
     let mes = data.getUTCMonth();
