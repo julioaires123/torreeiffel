@@ -44,6 +44,10 @@ function atualizarData() {
     data.setUTCSeconds(data.getUTCSeconds() + 25);
     
     let ano = data.getFullYear();
+    let mes = data.getMonth();
+    let dia = data.getDate();
+    let diaSemana = data.getDay();
+    
     let inicioVerao = new Date(ano, 2, 31);
     while (inicioVerao.getDay() !== 0) inicioVerao.setDate(inicioVerao.getDate() - 1);
     let fimVerao = new Date(ano, 9, 31);
@@ -53,6 +57,7 @@ function atualizarData() {
     data.setUTCHours(data.getUTCHours() + fusoHorario + 1);
     
     if (data.getHours() === 0 && data.getMinutes() === 0 && data.getSeconds() === 0) {
+        data.setDate(data.getDate() + 1); // Avança a data ao atingir 00:00:00
         exibirDataAtualizada();
     }
     setTimeout(atualizarData, 1000);
