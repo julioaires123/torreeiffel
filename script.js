@@ -3,6 +3,9 @@ setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
     
+    // Adiciona 23 segundos
+    data.setSeconds(data.getSeconds() + 23);
+    
     // Determina o horário de verão na França
     let ano = data.getUTCFullYear();
     let inicioVerao = new Date(ano, 2, 31); // Último domingo de março
@@ -26,12 +29,10 @@ function exibirDataAtualizada() {
     let semanas = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     
     let data = new Date();
-    let ano = data.getUTCFullYear();
-    let mes = data.getUTCMonth();
-    let dia = data.getUTCDate();
-    let diaSemana = data.getUTCDay();
+    // Adiciona 23 segundos
+    data.setSeconds(data.getSeconds() + 23);
     
-    // Ajusta o horário para a França antes de determinar o dia correto
+    let ano = data.getUTCFullYear();
     let inicioVerao = new Date(ano, 2, 31);
     while (inicioVerao.getDay() !== 0) inicioVerao.setDate(inicioVerao.getDate() - 1);
     let fimVerao = new Date(ano, 9, 31);
@@ -46,6 +47,8 @@ function exibirDataAtualizada() {
 // Atualiza a data à meia-noite na França
 function atualizarData() {
     let data = new Date();
+    // Adiciona 23 segundos
+    data.setSeconds(data.getSeconds() + 23);
     
     let ano = data.getUTCFullYear();
     let inicioVerao = new Date(ano, 2, 31);
