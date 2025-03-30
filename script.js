@@ -1,4 +1,3 @@
-// Atualiza o relógio com horário da França (UTC+1 ou UTC+2 no horário de verão)
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
@@ -13,7 +12,7 @@ setInterval(function relog() {
     let fimVerao = new Date(ano, 9, 31); // Último domingo de outubro
     while (fimVerao.getDay() !== 0) fimVerao.setDate(fimVerao.getDate() - 1);
     
-    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 2 : 1; // UTC+2 no horário de verão, UTC+1 no padrão
+    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 3 : 2; // UTC+3 no horário de verão, UTC+2 no padrão
     data.setUTCHours(data.getUTCHours() + fusoHorario); // Ajusta com base no fuso da França
     
     let h = data.getUTCHours().toString().padStart(2, '0');
@@ -38,7 +37,7 @@ function exibirDataAtualizada() {
     let fimVerao = new Date(ano, 9, 31);
     while (fimVerao.getDay() !== 0) fimVerao.setDate(fimVerao.getDate() - 1);
     
-    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 2 : 1;
+    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 3 : 2;
     data.setUTCHours(data.getUTCHours() + fusoHorario);
     
     document.getElementById("date").innerHTML = `${semanas[data.getUTCDay()]}, ${data.getUTCDate()} ${meses[data.getUTCMonth()]}, ${data.getUTCFullYear()}`;
@@ -56,7 +55,7 @@ function atualizarData() {
     let fimVerao = new Date(ano, 9, 31);
     while (fimVerao.getDay() !== 0) fimVerao.setDate(fimVerao.getDate() - 1);
     
-    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 2 : 1;
+    let fusoHorario = (data >= inicioVerao && data < fimVerao) ? 3 : 2;
     data.setUTCHours(data.getUTCHours() + fusoHorario);
     
     if (data.getUTCHours() === 0 && data.getUTCMinutes() === 0 && data.getUTCSeconds() === 0) {
