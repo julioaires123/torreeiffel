@@ -3,7 +3,7 @@ setInterval(function relog() {
     let data = new Date();
     
     // Adiciona 23 segundos
-    data.setSeconds(data.getSeconds() + 23);
+    data.setSeconds(data.getSeconds() + 18);
     
     // Determina o horário de verão na França
     let ano = data.getUTCFullYear();
@@ -29,7 +29,7 @@ function exibirDataAtualizada() {
     
     let data = new Date();
     // Adiciona 23 segundos
-    data.setSeconds(data.getSeconds() + 23);
+    data.setSeconds(data.getSeconds() + 18);
     
     let ano = data.getUTCFullYear();
     let inicioVerao = new Date(ano, 2, 31);
@@ -47,7 +47,7 @@ function exibirDataAtualizada() {
 function atualizarData() {
     let data = new Date();
     // Adiciona 23 segundos
-    data.setSeconds(data.getSeconds() + 23);
+    data.setSeconds(data.getSeconds() + 18);
     
     let ano = data.getUTCFullYear();
     let inicioVerao = new Date(ano, 2, 31);
