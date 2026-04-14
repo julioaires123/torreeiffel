@@ -1,46 +1,39 @@
 <!DOCTYPE html>
-<html lang="pr-br">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="style.css">
-
-    <title>CANAL Sr. VAQUINHA  </title>
+  <meta charset="UTF-8">
+  <title>Dashboard Financeiro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<h1>Heures en France</h1>
-  
+<body>
 
-<Body>
+  <div class="container">
 
-    <Div>
-        <section onload="relog5">
-            <p id="Relogio05"></p>
+    <h1>📊 Dashboard em Tempo Real</h1>
 
+    <div class="cards">
+      <div class="card">
+        <h2>Dólar</h2>
+        <p id="dolar">--</p>
+      </div>
 
-            <script src="script.js"></script>
-        </section>
+      <div class="card">
+        <h2>Bitcoin</h2>
+        <p id="bitcoin">--</p>
+      </div>
+    </div>
 
-        <section onload="relog">
-            <p id="relogio01"></p>
+    <div class="horarios">
+      <h2>Horários</h2>
+      <p id="horarios">Carregando...</p>
+    </div>
 
+    <div class="ticker">
+      <div class="ticker-content" id="ticker"></div>
+    </div>
 
-            <script src="script.js"></script>
-        </section>
+  </div>
 
-
-        <section onload="relog1">
-            <p id="date"></p>
-            <script src="script.js"></script>
-        </section>
-<section onload="exibirDataAtualizada()">
-    <p id="date"></p>
-</section>
-
-    </Div>
-   
-</Body>
- 
+  <script src="script.js"></script>
+</body>
 </html>
