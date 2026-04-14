@@ -1,4 +1,4 @@
-const API_URL = "https://SEU-PROJETO.vercel.app/api/dashboard";
+const API_URL = "https://dashboard-financeiro.vercel.app/api/dashboard";
 
 async function carregarDados() {
   try {
