@@ -1,35 +1,46 @@
 const API_URL = "https://dashboard-financeiro.vercel.app/api/dashboard";
 
-async function carregarDados() {
+export default async function handler(req, res) {
   try {
-    const res = await fetch(API_URL);
-    const data = await res.json();
 
-    // 💰 Cotações
-    document.getElementById("dolar").innerText = `R$ ${data.cotacoes.dolar}`;
-    document.getElementById("bitcoin").innerText = `$ ${data.cotacoes.bitcoin}`;
+    // ⏰ Horários (gerados localmente - não depende de API externa)
+    const agora = new Date();
 
-    // 🕒 Horários
-    document.getElementById("horarios").innerText =
-      `Brasília: ${formatarHora(data.time.brasilia)} | 
-       NY: ${formatarHora(data.time.new_york)} | 
-       Londres: ${formatarHora(data.time.londres)} | 
-       Tóquio: ${formatarHora(data.time.tokyo)}`;
+    const time = {
+      brasilia: agora.toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo" }),
+      new_york: agora.toLocaleTimeString("en-US", { timeZone: "America/New_York" }),
+      londres: agora.toLocaleTimeString("en-GB", { timeZone: "Europe/London" }),
+      tokyo: agora.toLocaleTimeString("ja-JP", { timeZone: "Asia/Tokyo" })
+    };
 
-    // 📰 Notícias (ticker)
-    const noticiasTexto = data.noticias.map(n => n.titulo).join(" • ");
-    document.getElementById("ticker").innerText = noticiasTexto;
+    // 💰 Dólar (API confiável sem chave)
+    const dolarRes = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL");
+    const dolarData = await dolarRes.json();
 
-  } catch (err) {
-    console.error("Erro ao carregar dados", err);
+    // 🪙 Bitcoin (CoinGecko - sem chave)
+    const btcRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+    const btcData = await btcRes.json();
+
+    // 📰 Notícias (mock inteligente para não quebrar)
+    const noticias = [
+      { titulo: "Mercados globais operam em alta hoje", fonte: "Finance News" },
+      { titulo: "Bitcoin mantém tendência de valorização", fonte: "Crypto Times" },
+      { titulo: "Dólar oscila com dados econômicos", fonte: "Market Watch" }
+    ];
+
+    res.status(200).json({
+      time,
+      cotacoes: {
+        dolar: dolarData.USDBRL.bid,
+        bitcoin: btcData.bitcoin.usd
+      },
+      noticias
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      erro: "API funcionando, mas falha externa",
+      detalhe: error.message
+    });
   }
 }
-
-function formatarHora(dataISO) {
-  const data = new Date(dataISO);
-  return data.toLocaleTimeString("pt-BR");
-}
-
-// Atualiza a cada 60s
-carregarDados();
-setInterval(carregarDados, 60000);
